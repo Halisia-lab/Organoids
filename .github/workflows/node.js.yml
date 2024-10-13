@@ -21,11 +21,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Go te server directory
+      run: cd server
     - name: Use Node.js ${{ matrix.node-version }}
-      run: |
-          cd server
-          node -v
-        uses: actions/setup-node@v4
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
