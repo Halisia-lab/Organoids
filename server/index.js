@@ -1,13 +1,13 @@
 const express = require('express');
 var bodyParser = require('body-parser');
-
+const cors = require('cors');
 const imageRouter = require('./routes/image.router');
 const segmentationRouter = require('./routes/segmentation.router');
 
 const { testDbConnection } = require('./config/db');
 
 const app = express();
-
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/images', imageRouter);
