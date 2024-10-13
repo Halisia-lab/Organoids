@@ -13,6 +13,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      PG_PASS: ${{ secrets.PG_PASS }}
+      DATABASE_URL: postgresql://postgres:${{ secrets.SECRET_PASSWORD }}@postgres/postgres
+      PORT: 8000
   
     steps:
     - uses: actions/checkout@v4
@@ -27,6 +31,10 @@ jobs:
 
     - name : Build
       run: npm run build --if-present
+      working-directory: ./server
+
+    - name : Launch database
+      run: docker-compose up
       working-directory: ./server
 
     - name : Run tests
