@@ -65,6 +65,13 @@ jobs:
       run: docker-compose up -d
       working-directory: ./server
 
+    - name: Wait for PostgreSQL to be ready
+      run: |
+        until docker exec local_pgdb pg_isready -U "${{ secrets.DB_USERNAME }}"; do
+          echo "Waiting for PostgreSQL to be ready..."
+          sleep 2
+        done
+
     - name : Run tests
       run: npm test
       working-directory: ./server
