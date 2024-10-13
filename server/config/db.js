@@ -2,7 +2,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 require('dotenv').config();
 
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
-    host: 'localhost',
+    host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: 'postgres',
   });
@@ -16,7 +16,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pr
   };
   
   sequelize.sync().then(() => {
-    console.log('Tables created successfully!');
+
   }).catch((error) => {
     console.error('Unable to create table : ', error);
   });

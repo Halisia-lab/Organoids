@@ -18,11 +18,5 @@ app.use((req, res) => {
 });
 
 
-app.listen(8080, () => {
-    console.log(`The server is listening...`);
-    testDbConnection();
-    try {
-    } catch ( error ) {
-        console.log(error);
-    }
-});
+
+module.exports = app;
