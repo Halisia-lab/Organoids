@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PG_PASS: ${{ secrets.DB_PASSWORD }}
-      DATABASE_URL: postgresql://${{ secrets.DB_USERNAME }}:${{ secrets.DB_PASSWORD }}@db:${{ secrets.DB_PORT }}/${{ secrets.DB_NAME }}
+      DATABASE_URL: postgresql://${{ secrets.DB_USERNAME }}:${{ secrets.DB_PASSWORD }}@${{ secrets.DB_HOST }}:${{ secrets.DB_PORT }}/${{ secrets.DB_NAME }}
       PORT: ${{ secrets.DB_PORT }}
   
     steps:
@@ -75,6 +75,7 @@ jobs:
 
     - name: Show PostgreSQL logs
       run: docker logs local_pgdb
+      run: docker-compose config
 
     - name : Run tests
       run: npm test
