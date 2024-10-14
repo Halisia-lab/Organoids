@@ -40,7 +40,6 @@ export const fetchImagesInValidation = async () => {
     try {
         const response = await fetch(`${API_URL}/validation`);
         const data = await response.json();
-        console.log(data["validationImages"]);
         
         return data["validationImages"];
     } catch (error) {
