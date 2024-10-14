@@ -12,6 +12,28 @@ export const fetchSegmentationByImageId = async (id) => {
     }
 };
 
+export const updateSegmentationBrightnessById = async (id, brightness) => {
+    try {
+        await fetch(`${API_URL}/${id}/brightness/${brightness}`, {
+            method: 'PUT', 
+          });
+    } catch (error) {
+        console.error('Error updating segmentation:', error);
+        throw error;
+    }
+};
+
+export const updateSegmentationContrastById = async (id, contrast) => {
+    try {
+        await fetch(`${API_URL}/${id}/contrast/${contrast}`, {
+            method: 'PUT', 
+          });
+    } catch (error) {
+        console.error('Error updating segmentation:', error);
+        throw error;
+    }
+};
+
 export const fetchSegmentationsInTesting = async () => {
     try {
         const response = await fetch(`${API_URL}/testing`);
