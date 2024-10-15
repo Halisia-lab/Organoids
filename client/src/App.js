@@ -1,14 +1,15 @@
 
 import React, { useState, useEffect } from "react";
-import { fetchImageById, fetchImagesInTesting, fetchImagesInTraining, fetchImagesInValidation } from "./services/image.service";
+import { fetchImagesInTesting, fetchImagesInTraining, fetchImagesInValidation } from "./services/image.service";
 import { fetchSegmentationByImageId, updateSegmentationBrightnessById, updateSegmentationContrastById } from "./services/segmentation.service";
 import Slider from "@mui/material/Slider";
 
 
 function App() {
   const S3_BUCKET_URL = process.env.REACT_APP_S3_URL;
-  
+
   const [activeTab, setActiveTab] = useState('Testing');
+  const [displayMask, setDisplayMask] = useState(true);
 
   const defaultOpacity = 50;
   const defaultBrightness = 100;
@@ -18,7 +19,9 @@ function App() {
   const [mainImage, setMainImage] = useState(null);
   const [mainSegmentation, setMainSegmentation] = useState(null);
 
-  const [displayMask, setDisplayMask] = useState(true);
+  const [testingImages, setTestingImages] = useState([]);
+  const [trainingImages, setTrainingImages] = useState([]);
+  const [validationImages, setValidationImages] = useState([]);
 
   const [opacity, setOpacity] = useState(defaultOpacity);
   const [brightness, setBrightness] = useState(defaultBrightness);
@@ -27,27 +30,42 @@ function App() {
   const [brightnessDisplayer, setBrightnessDisplayer] = useState(defaultBrightness);
   const [contrastDisplayer, setContrastDisplayer] = useState(defaultBrightness);
 
-  
+  const imagesPerTab = {"Testing": testingImages, "Training": trainingImages, "Validation": validationImages}
 
   useEffect(() => {
-    uploadTestingImages();
-
-
-
+    loadTestingTab();
+    fetchOtherImages();
   }, []);
+
+  const loadTestingTab = async () => {
+    try {
+      const images = await fetchImagesInTesting();
+      setImageList(images);
+      setTestingImages(images);
+
+      if (images.length > 0) {
+        const firstImage = images[0];
+        setMainImage(firstImage);
+        await synchroniseSegmentationSettings(firstImage.id);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
+
+  const fetchOtherImages = async () => {
+    setTrainingImages(await fetchImagesInTraining());
+    setValidationImages(await fetchImagesInValidation());
+  }
 
   const chooseImage = async (image) => {
     setMainImage({ id: image.id, name: image.name, url: image.url });
-
     await synchroniseSegmentationSettings(image.id);
-
-
   }
 
   const synchroniseSegmentationSettings = async (imageId) => {
     const segmentation = await fetchSegmentationByImageId(imageId);
     setMainSegmentation(segmentation);
-
     setBrightness(segmentation.brightness);
     setContrast(segmentation.contrast);
     setBrightnessDisplayer(segmentation.brightness);
@@ -63,7 +81,6 @@ function App() {
   const saveSettings = (event) => {
     updateSegmentationBrightnessById(mainSegmentation.id, brightness);
     updateSegmentationContrastById(mainSegmentation.id, contrast);
-
     setBrightnessDisplayer(brightness);
     setContrastDisplayer(contrast);
   }
@@ -84,12 +101,12 @@ function App() {
     setContrast(event.target.value);
   }
 
-  const uploadValidationImages = async () => {
-    setActiveTab("Validation");
-    try {
-      const images = await fetchImagesInValidation();
-      setImageList(images);
+  const changeTab = async (tab) => {
+    setActiveTab(tab);
 
+    try {
+      const images = imagesPerTab[tab].slice(0,100);
+      setImageList(images);
       if (images.length > 0) {
         const firstImage = images[0];
         setMainImage(firstImage);
@@ -100,43 +117,6 @@ function App() {
       console.error("Error fetching data:", error);
     }
   }
-
-  const uploadTestingImages = async () => {
-
-    setActiveTab("Testing");
-    try {
-      const images = await fetchImagesInTesting();
-      setImageList(images);
-
-      if (images.length > 0) {
-        const firstImage = images[0];
-        setMainImage(firstImage);
-
-        await synchroniseSegmentationSettings(firstImage.id);
-
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }
-
-  const uploadTrainingImages = async () => {
-    setActiveTab("Training");
-    try {
-      const images = await fetchImagesInTraining();
-      setImageList(images.slice(0, 100));
-
-      if (images.length > 0) {
-        const firstImage = images[0];
-        setMainImage(firstImage);
-
-        await synchroniseSegmentationSettings(firstImage.id);
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }
-
 
   return (
     <div className="App">
@@ -151,7 +131,7 @@ function App() {
         <div className="grid grid-cols-4 grid-rows-8 text-white gap-3 font-mono max-h-1/2">
 
           {/* 1ere ligne */}
-          <button className={`${activeTab === "Testing" ? "text-sky-300" : ""} bg-black bg-opacity-30 text-2xl py-4 text-center hover:cursor-pointer hover:bg-sky-500 hover:text-black`} onClick={uploadTestingImages}>Testing</button>
+          <button className={`${activeTab === "Testing" ? "text-sky-300" : ""} bg-black bg-opacity-30 text-2xl py-4 text-center hover:cursor-pointer hover:bg-sky-500 hover:text-black`} onClick={()=> changeTab("Testing")}>Testing</button>
           <div className="col-span-2 bg-black bg-opacity-30 place-items-center row-span-6 py-4"> {imageList && mainSegmentation && mainSegmentation.url ? (
             <div className="flex justify-center relative">
               <img src={`${S3_BUCKET_URL}/${mainImage.url}`} alt={mainImage.name} className="w-[778px] h-[583px]" />
@@ -180,10 +160,10 @@ function App() {
           </div>
 
           {/* 2e ligne */}
-          <button className={`${activeTab === "Training" ? "text-sky-300" : ""} bg-black bg-opacity-30 text-2xl py-4 text-center hover:cursor-pointer hover:bg-sky-500 hover:text-black`} onClick={uploadTrainingImages}>Training</button>
+          <button className={`${activeTab === "Training" ? "text-sky-300" : ""} bg-black bg-opacity-30 text-2xl py-4 text-center hover:cursor-pointer hover:bg-sky-500 hover:text-black`} onClick={()=> changeTab("Training")}>Training</button>
 
           {/* 3e ligne */}
-          <button className={`${activeTab === "Validation" ? "text-sky-300" : ""} bg-black bg-opacity-30 text-2xl py-4 text-center hover:cursor-pointer hover:bg-sky-500 hover:text-black`} onClick={uploadValidationImages}>Validation</button>
+          <button className={`${activeTab === "Validation" ? "text-sky-300" : ""} bg-black bg-opacity-30 text-2xl py-4 text-center hover:cursor-pointer hover:bg-sky-500 hover:text-black`} onClick={()=> changeTab("Validation")}>Validation</button>
 
           {/* 4e ligne */}
           <div className="row-span-5 flex flex-col bg-black bg-opacity-30 text-xl py-4 px-5 justify-evenly">
