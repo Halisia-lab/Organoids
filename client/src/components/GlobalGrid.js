@@ -3,6 +3,7 @@ import { fetchImagesInTesting, fetchImagesInTraining, fetchImagesInValidation } 
 import { fetchSegmentationByImageId, updateSegmentationBrightnessById, updateSegmentationContrastById } from ".././services/segmentation.service";
 import Tab from "./Tab"
 import Slider from "@mui/material/Slider";
+import MainImageSuperposition from "./MainImageSuperposition";
 
 function GlobalGrid() {
 
@@ -122,17 +123,13 @@ function GlobalGrid() {
     return (
         <div className="grid grid-cols-4 grid-rows-8 text-white gap-3 font-mono max-h-1/2">
 
-            {/* 1ere ligne */}
-           
-            <Tab name="Testing" changeTab={changeTab} activeTab={activeTab}/>
-            <div className="col-span-2 bg-black bg-opacity-30 place-items-center row-span-6 py-4"> {imageList && mainSegmentation && mainSegmentation.url ? (
-                <div className="flex justify-center relative">
-                    <img src={`${S3_BUCKET_URL}/${mainImage.url}`} alt={mainImage.name} className="w-[778px] h-[583px]" />
-                    <img src={`${S3_BUCKET_URL}/${mainSegmentation.url}`} alt={mainSegmentation.name} style={{ filter: `brightness(${brightness}%) contrast(${contrast}%)`, opacity: opacity / 100, }} className={`w-[778px] h-[583px] absolute z-10 ${displayMask ? "" : "hidden"}`} />
-                </div>
-            ) : (
-                <div className="flex justify-center items-center w-full h-full">Loading...</div>
-            )}</div>
+            {/* 1st row */}
+            <Tab name="Testing" changeTab={changeTab} activeTab={activeTab} />
+
+            <div className="col-span-2 bg-black bg-opacity-30 place-items-center row-span-6 py-4">
+                <MainImageSuperposition imageList={imageList} mainImage={mainImage} mainSegmentation={mainSegmentation} brightness={brightness} opacity={opacity} displayMask={displayMask} />
+            </div>
+
             <div className="row-span-8 bg-black bg-opacity-30 flex flex-col items-center justify-around text-lg">
                 <label className="inline-flex items-center cursor-pointer">
                     <input type="checkbox" value="" className="sr-only peer" onChange={handleToggleChange} defaultChecked={true} />
@@ -149,16 +146,15 @@ function GlobalGrid() {
                     <button className="bg-sky-500 px-6 py-4 rounded-2xl text-2xl" onClick={saveSettings}>Save settings</button>
                     <button className="bg-gray-100 px-6 py-4 rounded-2xl text-2xl text-gray-700" onClick={resetSettings}>Undo</button>
                 </div>
-
             </div>
 
-            {/* 2e ligne */}
-            <Tab name="Training" changeTab={changeTab} activeTab={activeTab}/>
+            {/* 2nd row*/}
+            <Tab name="Training" changeTab={changeTab} activeTab={activeTab} />
 
-            {/* 3e ligne */}
-            <Tab name="Validation" changeTab={changeTab} activeTab={activeTab}/>
-            
-            {/* 4e ligne */}
+            {/* 3rd row */}
+            <Tab name="Validation" changeTab={changeTab} activeTab={activeTab} />
+
+            {/* 4th row */}
             <div className="row-span-5 flex flex-col bg-black bg-opacity-30 text-xl py-4 px-5 justify-evenly">
                 <div className="flex justify-center text-2xl">Saved Settings</div>
                 <div>
