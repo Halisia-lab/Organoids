@@ -1,6 +1,7 @@
 
 import { svgMapping } from "../utils/objectsMapping";
-function SavedSettingsItem({label, value}) {
+
+function SavedSettingsItem({ label, value }) {
     return (
         <div>
             <div className="flex items-center">

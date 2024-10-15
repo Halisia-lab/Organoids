@@ -1,4 +1,5 @@
 function ShowMaskToggle({ handleChange }) {
+
     return (
         <label className="inline-flex items-center cursor-pointer">
             <input type="checkbox" value="" className="sr-only peer" onChange={handleChange} defaultChecked={true} />

@@ -1,6 +1,5 @@
 
 import Slider from "@mui/material/Slider";
-import React from "react";
 
 function SettingsSlider({label, value, handleChange, displayMask}) {
     return (
