@@ -81,27 +81,13 @@ class SegmentationController {
         }
     }
 
-    static async updateBrightnessById(req, res) {
+    static async updateOpacityById(req, res) {
         const id = req.params.id;
-        const brightness = req.params.brightness;
+        const opacity = req.params.opacity;
         try {
             const segmentation = await Segmentation.findOne({ where: { id: id } });
 
-            await segmentation.update({ brightness: parseInt(brightness) });
-
-            res.status(200).json({ segmentation });
-        } catch (error) {
-            res.status(400).json({ error: error });
-        }
-    }
-
-    static async updateContrastById(req, res) {
-        const id = req.params.id;
-        const contrast = req.params.contrast;
-        try {
-            const segmentation = await Segmentation.findOne({ where: { id: id } });
-
-            await segmentation.update({ contrast: parseInt(contrast) });
+            await segmentation.update({ opacity: parseInt(opacity) });
 
             res.status(200).json({ segmentation });
         } catch (error) {

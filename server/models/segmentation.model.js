@@ -16,13 +16,10 @@ const Segmentation = sequelize.define("Segmentation", {
     url: {
         type: DataTypes.STRING,
     },
-    maskArea: {
+    segmentationArea: {
         type: DataTypes.INTEGER,
     },
-    brightness: {
-        type: DataTypes.INTEGER,
-    },
-    contrast: {
+    opacity: {
         type: DataTypes.INTEGER,
     },
     imageId: {

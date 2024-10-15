@@ -9,8 +9,7 @@ router.get('/segmentation/testing', SegmentationController.getAllSegmentationsIn
 router.get('/segmentation/training', SegmentationController.getAllSegmentationsInTraining);
 router.get('/segmentation/validation', SegmentationController.getAllSegmentationsInValidation);
 router.get('/image/:id', SegmentationController.getSegmentationByImageId);
-router.put('/:id/brightness/:brightness', SegmentationController.updateBrightnessById);
-router.put('/:id/contrast/:contrast', SegmentationController.updateContrastById);
+router.put('/:id/opacity/:opacity', SegmentationController.updateOpacityById);
 
 
 module.exports = router;

@@ -35,25 +35,14 @@ describe('Segmentation API', () => {
     expect(response.status).toBe(200);
   });
 
-  it('should update segmentation brightness', async () => {
+  it('should update segmentation opacity', async () => {
     const id = 1;
     const responseSegmentation = await request(app).get(`/segmentations/${id}`);
-    const oldBrightness = responseSegmentation.body.segmentation.brightness;
+    const oldOpacity = responseSegmentation.body.segmentation.opacity;
 
-    var response = await request(app).put(`/segmentations/${id}/brightness/100`);
+    var response = await request(app).put(`/segmentations/${id}/opacity/100`);
     expect(response.status).toBe(200);
-    response = await request(app).put(`/segmentations/${id}/brightness/${oldBrightness}`);
-    expect(response.status).toBe(200);
-  });
-
-  it('should update segmentation contrast', async () => {
-    const id = 1;
-    const responseSegmentation = await request(app).get(`/segmentations/${id}`);
-    const oldContrast = responseSegmentation.body.segmentation.contrast;
-
-    var response = await request(app).put(`/segmentations/${id}/contrast/100`);
-    expect(response.status).toBe(200);
-    response = await request(app).put(`/segmentations/${id}/contrast/${oldContrast}`);
+    response = await request(app).put(`/segmentations/${id}/opacity/${oldOpacity}`);
     expect(response.status).toBe(200);
   });
 });

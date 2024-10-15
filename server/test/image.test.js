@@ -28,4 +28,26 @@ describe('Image API', () => {
     const response = await request(app).get('/images/1');
     expect(response.status).toBe(200);
   });
+
+  it('should update image brightness', async () => {
+    const id = 1;
+    const responseImage = await request(app).get(`/images/${id}`);
+    const oldBrightness = responseImage.body.image.brightness;
+
+    var response = await request(app).put(`/images/${id}/brightness/100`);
+    expect(response.status).toBe(200);
+    response = await request(app).put(`/images/${id}/brightness/${oldBrightness}`);
+    expect(response.status).toBe(200);
+  });
+
+  it('should update image contrast', async () => {
+    const id = 1;
+    const responseImage = await request(app).get(`/images/${id}`);
+    const oldContrast = responseImage.body.image.contrast;
+
+    var response = await request(app).put(`/images/${id}/contrast/100`);
+    expect(response.status).toBe(200);
+    response = await request(app).put(`/images/${id}/contrast/${oldContrast}`);
+    expect(response.status).toBe(200);
+  });
 });

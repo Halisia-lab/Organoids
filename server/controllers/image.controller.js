@@ -72,6 +72,36 @@ class ImageController {
             res.status(400).json({ error: error });
         }
     }
+
+
+
+    static async updateBrightnessById(req, res) {
+        const id = req.params.id;
+        const brightness = req.params.brightness;
+        try {
+            const image = await Image.findOne({ where: { id: id } });
+
+            await image.update({ brightness: parseInt(brightness) });
+
+            res.status(200).json({ image });
+        } catch (error) {
+            res.status(400).json({ error: error });
+        }
+    }
+
+    static async updateContrastById(req, res) {
+        const id = req.params.id;
+        const contrast = req.params.contrast;
+        try {
+            const image = await Image.findOne({ where: { id: id } });
+
+            await image.update({ contrast: parseInt(contrast) });
+
+            res.status(200).json({ image });
+        } catch (error) {
+            res.status(400).json({ error: error });
+        }
+    }
 }
 
 module.exports = ImageController;
