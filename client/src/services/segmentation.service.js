@@ -36,7 +36,7 @@ export const updateSegmentationContrastById = async (id, contrast) => {
 
 export const fetchSegmentationsInTesting = async () => {
     try {
-        const response = await fetch(`${API_URL}/testing`);
+        const response = await fetch(`${API_URL}/segmentation/testing`);
         const data = await response.json();
         
         return data["testingSegmentations"];
@@ -48,7 +48,7 @@ export const fetchSegmentationsInTesting = async () => {
 
 export const fetchSegmentationsInTraining = async () => {
     try {
-        const response = await fetch(`${API_URL}/training`);
+        const response = await fetch(`${API_URL}/segmentation/training`);
         const data = await response.json();
         
         return data["trainingSegmentations"];
@@ -60,7 +60,7 @@ export const fetchSegmentationsInTraining = async () => {
 
 export const fetchSegmentationsInValidation = async () => {
     try {
-        const response = await fetch(`${API_URL}/validation`);
+        const response = await fetch(`${API_URL}/segmentation/validation`);
         const data = await response.json();
         
         return data["validationSegmentations"];

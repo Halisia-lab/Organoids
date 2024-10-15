@@ -2,6 +2,7 @@ const Segmentation = require("../models/segmentation.model");
 
 class SegmentationController {
     static async getAllSegmentations(req, res) {
+        
         try {
             const segmentations = await Segmentation.findAll();
             res.status(200).json({ segmentations });
@@ -12,6 +13,8 @@ class SegmentationController {
 
     static async getAllSegmentationsInTesting(req, res) {
         const testingSegmentations = [];
+        console.log(req);
+        
         try {
             const segmentations = await Segmentation.findAll();
             segmentations.forEach(segmentation => {
@@ -19,9 +22,10 @@ class SegmentationController {
                     testingSegmentations.push(segmentation);
                 }
             });
+            
             res.status(200).json({ testingSegmentations });
         } catch (error) {
-            res.status(400).json({ error: error });
+            res.status(400).json({ error: error.message });
         }
     }
 

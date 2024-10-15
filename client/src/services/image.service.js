@@ -16,7 +16,6 @@ export const fetchImagesInTesting = async () => {
     try {
         const response = await fetch(`${API_URL}/testing`);
         const data = await response.json();
-        
         return data["testingImages"];
     } catch (error) {
         console.error('Error fetching testing images:', error);
@@ -28,7 +27,6 @@ export const fetchImagesInTraining = async () => {
     try {
         const response = await fetch(`${API_URL}/training`);
         const data = await response.json();
-        
         return data["trainingImages"];
     } catch (error) {
         console.error('Error fetching testing images:', error);
@@ -40,7 +38,6 @@ export const fetchImagesInValidation = async () => {
     try {
         const response = await fetch(`${API_URL}/validation`);
         const data = await response.json();
-        
         return data["validationImages"];
     } catch (error) {
         console.error('Error fetching testing images:', error);
