@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { fetchImagesInTesting, fetchImagesInTraining, fetchImagesInValidation } from "../services/image.service";
-import { fetchSegmentationByImageId, updateSegmentationBrightnessById, updateSegmentationContrastById } from ".././services/segmentation.service";
+import { fetchImageById, fetchImagesInTesting, fetchImagesInTraining, fetchImagesInValidation } from "../services/image.service";
+import { fetchSegmentationByImageId } from ".././services/segmentation.service";
+import {updateImageBrightnessById, updateImageContrastById} from "../services/image.service"
 import Tab from "./Tab";
 import SettingsSlider from "./SettingsSlider";
 import ShowMaskToggle from "./ShowMaskToggle";
@@ -45,7 +46,7 @@ function GlobalGrid() {
                 if (images.length > 0) {
                     const firstImage = images[0];
                     setMainImage(firstImage);
-                    await synchroniseSegmentationSettings(firstImage.id);
+                    await synchroniseSettings(firstImage.id);
                 }
             } catch (error) {
                 console.error("Error loading first tab:", error);
@@ -62,28 +63,30 @@ function GlobalGrid() {
     }
 
     const chooseImage = async (image) => {
-        setMainImage({ id: image.id, name: image.name, url: image.url });
-        await synchroniseSegmentationSettings(image.id);
+        setMainImage({ id: image.id, name: image.name, url: image.url, brightness: image.brightness, contrast: image.contrast });
+        await synchroniseSettings(image.id);
     }
 
-    const synchroniseSegmentationSettings = async (imageId) => {
+    const synchroniseSettings = async (imageId) => { //TODO : opacity displayer
         const segmentation = await fetchSegmentationByImageId(imageId);
+        const image = await fetchImageById(imageId);
         setMainSegmentation(segmentation);
-        setBrightness(segmentation.brightness);
-        setContrast(segmentation.contrast);
-        setBrightnessDisplayer(segmentation.brightness);
-        setContrastDisplayer(segmentation.contrast);
+        setBrightness(image.brightness);
+        setContrast(image.contrast);
+        setOpacity(segmentation.opacity)
+        setBrightnessDisplayer(image.brightness);
+        setContrastDisplayer(image.contrast);
     }
 
     const resetSettings = (event) => {
-        setOpacity(defaultOpacity);
-        setBrightness(mainSegmentation.brightness);
-        setContrast(mainSegmentation.contrast);
+        setOpacity(mainSegmentation.opacity);
+        setBrightness(mainImage.brightness);
+        setContrast(mainImage.contrast);
     }
 
-    const saveSettings = (event) => {
-        updateSegmentationBrightnessById(mainSegmentation.id, brightness);
-        updateSegmentationContrastById(mainSegmentation.id, contrast);
+    const saveSettings = (event) => { //TODO: updateSegmentationOpacityById
+        updateImageBrightnessById(mainImage.id, brightness);
+        updateImageContrastById(mainImage.id, contrast);
         setBrightnessDisplayer(brightness);
         setContrastDisplayer(contrast);
     }
@@ -113,7 +116,7 @@ function GlobalGrid() {
                 const firstImage = images[0];
                 setMainImage(firstImage);
 
-                await synchroniseSegmentationSettings(firstImage.id)
+                await synchroniseSettings(firstImage.id)
             }
         } catch (error) {
             console.error("Error changing tab:", error);

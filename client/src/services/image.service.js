@@ -46,3 +46,25 @@ export const fetchImagesInValidation = async () => {
         throw error;
     }
 };
+
+export const updateImageBrightnessById = async (id, brightness) => {
+    try {
+        await fetch(`${API_URL}/${id}/brightness/${brightness}`, {
+            method: 'PUT', 
+          });
+    } catch (error) {
+        console.error('Error updating Image:', error);
+        throw error;
+    }
+};
+
+export const updateImageContrastById = async (id, contrast) => {
+    try {
+        await fetch(`${API_URL}/${id}/contrast/${contrast}`, {
+            method: 'PUT', 
+          });
+    } catch (error) {
+        console.error('Error updating Image:', error);
+        throw error;
+    }
+};
