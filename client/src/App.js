@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { fetchImagesInTesting, fetchImagesInTraining, fetchImagesInValidation } from "./services/image.service";
+import  Title from "./components/Title";
 import { fetchSegmentationByImageId, updateSegmentationBrightnessById, updateSegmentationContrastById } from "./services/segmentation.service";
 import Slider from "@mui/material/Slider";
 
@@ -49,7 +50,7 @@ function App() {
         await synchroniseSegmentationSettings(firstImage.id);
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error loading first tab:", error);
     }
   }
 
@@ -114,19 +115,16 @@ function App() {
         await synchroniseSegmentationSettings(firstImage.id)
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error changing tab:", error);
     }
   }
 
   return (
-    <div className="App">
+    <div>
+
       <header className="bg-gradient-to-r from-[#0e0327] to-[#3533cd] h-screen p-10 overflow-hidden flex flex-col justify-evenly">
 
-        <div className="flex flex-col text-white text-center py-5 font-mono">
-
-          <div className="text-[35px]">MouseOrganoids Analysis</div>
-          <div className="uppercase text-2xl">Choose an image</div>
-        </div>
+        <Title />
 
         <div className="grid grid-cols-4 grid-rows-8 text-white gap-3 font-mono max-h-1/2">
 
@@ -138,7 +136,7 @@ function App() {
               <img src={`${S3_BUCKET_URL}/${mainSegmentation.url}`} alt={mainSegmentation.name} style={{ filter: `brightness(${brightness}%) contrast(${contrast}%)`, opacity: opacity / 100, }} className={`w-[778px] h-[583px] absolute z-10 ${displayMask ? "" : "hidden"}`} />
             </div>
           ) : (
-            <div className="flex justify-center text-center">Loading...</div>
+            <div className="flex justify-center items-center w-full h-full">Loading...</div>
           )}</div>
           <div className="row-span-8 bg-black bg-opacity-30 flex flex-col items-center justify-around text-lg">
             <label className="inline-flex items-center cursor-pointer">
@@ -200,7 +198,7 @@ function App() {
               />
             ))
             ) : (
-              <p>Loading...</p>
+              <div className="flex justify-center items-center w-full h-full">Loading...</div>
             )}
           </div>
         </div>
