@@ -132,9 +132,9 @@ function GlobalGrid() {
 
             <div className="row-span-8 bg-black bg-opacity-30 flex flex-col items-center justify-around text-lg">
                 <ShowMaskToggle handleChange={handleToggleChange} />
-                <SettingsSlider label={"Opacity"} value={opacity} handleChange={handleOpacityChange} displayMask={displayMask} />
-                <SettingsSlider label={"Brightness"} value={brightness} handleChange={handleBrightnessChange} displayMask={displayMask} />
-                <SettingsSlider label={"Contrast"} value={contrast} handleChange={handleContrastChange} displayMask={displayMask} />
+                <SettingsSlider label={"Mask Opacity"} value={opacity} handleChange={handleOpacityChange} disabled={!displayMask} />
+                <SettingsSlider label={"Brightness"} value={brightness} handleChange={handleBrightnessChange} disabled={false} />
+                <SettingsSlider label={"Contrast"} value={contrast} handleChange={handleContrastChange} disabled={false} />
 
                 <div className="flex flex-row space-x-5">
                 <CustomButton label={"Save settings"} primary={true} onClick={saveSettings}/>
