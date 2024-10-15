@@ -6,14 +6,13 @@ import Slider from "@mui/material/Slider";
 
 
 function App() {
-
+  const S3_BUCKET_URL = process.env.REACT_APP_S3_URL;
+  
   const [activeTab, setActiveTab] = useState('Testing');
 
   const defaultOpacity = 50;
   const defaultBrightness = 100;
   const defaultContrast = 100;
-
-
 
   const [imageList, setImageList] = useState([]);
   const [mainImage, setMainImage] = useState(null);
@@ -28,7 +27,7 @@ function App() {
   const [brightnessDisplayer, setBrightnessDisplayer] = useState(defaultBrightness);
   const [contrastDisplayer, setContrastDisplayer] = useState(defaultBrightness);
 
-  const S3_BUCKET_URL = process.env.REACT_APP_S3_URL;
+  
 
   useEffect(() => {
     uploadTestingImages();
@@ -192,7 +191,7 @@ function App() {
             <div>
               <div className="flex items-center">
                 <svg className="w-10 h-10 mx-3 text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5V3m0 18v-2M7.05 7.05 5.636 5.636m12.728 12.728L16.95 16.95M5 12H3m18 0h-2M7.05 16.95l-1.414 1.414M18.364 5.636 16.95 7.05M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" />
+                  <path stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5V3m0 18v-2M7.05 7.05 5.636 5.636m12.728 12.728L16.95 16.95M5 12H3m18 0h-2M7.05 16.95l-1.414 1.414M18.364 5.636 16.95 7.05M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" />
                 </svg>
                 Brightness</div>
               <div className="text-[30px] p-3 mx-12">{brightnessDisplayer}</div>
