@@ -8,7 +8,9 @@ class ImageController {
 
     static async getAllImages(req, res) {
         try {
-            const images = await Image.findAll();
+            const images = await Image.findAll({
+                order: [['id', 'ASC']] 
+            });
             res.status(200).json({ images });
         } catch (error) {
             res.status(400).json({ error: error });
@@ -19,7 +21,9 @@ class ImageController {
         const testingImages = [];
         try {
 
-            const images = await Image.findAll();
+            const images = await Image.findAll({
+                order: [['id', 'ASC']] 
+            });
             images.forEach(image => {
                 if (image["url"].includes("testing/")) {
                     testingImages.push(image);
@@ -35,7 +39,9 @@ class ImageController {
         const trainingImages = [];
         try {
 
-            const images = await Image.findAll();
+            const images = await Image.findAll({
+                order: [['id', 'ASC']] 
+            });
             images.forEach(image => {
                 if (image["url"].includes("training/")) {
                     trainingImages.push(image);
@@ -51,7 +57,9 @@ class ImageController {
         const validationImages = [];
         try {
 
-            const images = await Image.findAll();
+            const images = await Image.findAll({
+                order: [['id', 'ASC']] 
+            });
             images.forEach(image => {
                 if (image["url"].includes("validation/")) {
                     validationImages.push(image);

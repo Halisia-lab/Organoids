@@ -9,7 +9,7 @@ function MainImageSuperposition({imageList, mainImage, mainSegmentation, brightn
                 <div className="flex justify-center relative">
                     <img src={`${S3_BUCKET_URL}/${mainImage.url}`}
                         alt={mainImage.name} 
-                        style={{ filter: `brightness(${brightness}%) contrast(${contrast}%)` }}
+                        style={{ filter: `brightness(${brightness+100}%) contrast(${contrast+100}%)` }}
                         className="w-[778px] h-[583px]"
                     />
                     <img src={`${S3_BUCKET_URL}/${mainSegmentation.url}`}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { fetchImageById, fetchImagesInTesting, fetchImagesInTraining, fetchImagesInValidation } from "../services/image.service";
-import { fetchSegmentationByImageId } from ".././services/segmentation.service";
+import { fetchSegmentationByImageId, updateSegmentationOpacityById } from ".././services/segmentation.service";
 import {updateImageBrightnessById, updateImageContrastById} from "../services/image.service"
 import Tab from "./Tab";
 import SettingsSlider from "./SettingsSlider";
@@ -16,8 +16,8 @@ function GlobalGrid() {
     const [displayMask, setDisplayMask] = useState(true);
 
     const defaultOpacity = 50;
-    const defaultBrightness = 100;
-    const defaultContrast = 100;
+    const defaultBrightness = 0;
+    const defaultContrast = 0;
 
     const [imageList, setImageList] = useState([]);
     const [mainImage, setMainImage] = useState(null);
@@ -31,8 +31,9 @@ function GlobalGrid() {
     const [brightness, setBrightness] = useState(defaultBrightness);
     const [contrast, setContrast] = useState(defaultContrast);
 
+    const [opacityDisplayer, setOpacityDisplayer] = useState(defaultOpacity);
     const [brightnessDisplayer, setBrightnessDisplayer] = useState(defaultBrightness);
-    const [contrastDisplayer, setContrastDisplayer] = useState(defaultBrightness);
+    const [contrastDisplayer, setContrastDisplayer] = useState(defaultContrast);
 
     const imagesPerTab = { "Testing": testingImages, "Training": trainingImages, "Validation": validationImages }
 
@@ -67,13 +68,14 @@ function GlobalGrid() {
         await synchroniseSettings(image.id);
     }
 
-    const synchroniseSettings = async (imageId) => { //TODO : opacity displayer
+    const synchroniseSettings = async (imageId) => { 
         const segmentation = await fetchSegmentationByImageId(imageId);
         const image = await fetchImageById(imageId);
         setMainSegmentation(segmentation);
         setBrightness(image.brightness);
         setContrast(image.contrast);
         setOpacity(segmentation.opacity)
+        setOpacityDisplayer(segmentation.opacity);
         setBrightnessDisplayer(image.brightness);
         setContrastDisplayer(image.contrast);
     }
@@ -84,9 +86,11 @@ function GlobalGrid() {
         setContrast(mainImage.contrast);
     }
 
-    const saveSettings = (event) => { //TODO: updateSegmentationOpacityById
+    const saveSettings = (event) => { 
+        updateSegmentationOpacityById(mainSegmentation.id, opacity);
         updateImageBrightnessById(mainImage.id, brightness);
         updateImageContrastById(mainImage.id, contrast);
+        setOpacityDisplayer(opacity);
         setBrightnessDisplayer(brightness);
         setContrastDisplayer(contrast);
     }
@@ -135,10 +139,10 @@ function GlobalGrid() {
 
             <div className="row-span-8 bg-black bg-opacity-30 flex flex-col items-center justify-around text-lg">
                 <ShowMaskToggle handleChange={handleToggleChange} />
-                <SettingsSlider label={"Mask Opacity"} value={opacity} handleChange={handleOpacityChange} disabled={!displayMask} />
-                <SettingsSlider label={"Brightness"} value={brightness} handleChange={handleBrightnessChange} disabled={false} />
-                <SettingsSlider label={"Contrast"} value={contrast} handleChange={handleContrastChange} disabled={false} />
-
+                <SettingsSlider label={"Mask Opacity"} value={opacity} handleChange={handleOpacityChange} disabled={!displayMask} negativeValues={false} />
+                <SettingsSlider label={"Brightness"} value={brightness} handleChange={handleBrightnessChange} disabled={false} negativeValues={true}/>
+                <SettingsSlider label={"Contrast"} value={contrast} handleChange={handleContrastChange} disabled={false} negativeValues={true} />
+                
                 <div className="flex flex-row space-x-5">
                 <CustomButton label={"Save settings"} primary={true} onClick={saveSettings}/>
                 <CustomButton label={"Undo"} primary={false} onClick={resetSettings}/>
@@ -153,7 +157,7 @@ function GlobalGrid() {
 
             {/* 4th row */}
             <div className="row-span-5 flex flex-col bg-black bg-opacity-30 text-xl py-4 px-5 justify-evenly">
-                <SettingsDisplayer brightness={brightnessDisplayer} contrast={contrastDisplayer} />
+                <SettingsDisplayer opacity={opacityDisplayer} brightness={brightnessDisplayer} contrast={contrastDisplayer} />
             </div>
 
             <div className="col-span-2 bg-black bg-opacity-30 row-span-2 overflow-x-scroll flex space-x-3 py-4 items-center px-4">
