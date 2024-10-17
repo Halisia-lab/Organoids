@@ -5,7 +5,7 @@ services:
     container_name: local_pgdb
     restart: always
     ports:
-      - "5433:5432"
+      - #remplir avec "DB_PORT:5432"
     environment:
       POSTGRES_PASSWORD: #remplir avec DB_PASSWORD
       POSTGRES_USER: #remplir avec DB_USERNAME
