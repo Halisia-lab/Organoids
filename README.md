@@ -9,7 +9,7 @@ Créez un fichier à l'interieur du dossier /server avec ces variables :
 
 DB_USERNAME= [à remplir]  
 DB_PASSWORD= [à remplir]  
-DB_HOST= [à remplir]  
+DB_HOST= localhost  
 DB_NAME= [à remplir]  
 DB_PORT= [à remplir]  
 
@@ -23,7 +23,7 @@ Le projet contient un fichier docker-compose.yml pour pouvoir lancer postgreSQL 
 - A l'intérieur du fichier, complétez les variables avec celles du fichier server/.env .  
 - Lancez la commande 'docker-compose up' pour créer démarrer les conteneurs.
 La suite des explications se poursuit avec l'interface de pgAdmin, que l'on accéder sur localhost:8888  
-- Créez un serveur avec les variables définies dans le docker-compose :
+- Créez un serveur avec les variables définies dans le docker-compose (pour host, mettre l'adresse IP de la machine au lieu de localhost) :
   
 <img width="763" alt="Capture d’écran 2024-10-17 à 23 40 14" src="https://github.com/user-attachments/assets/4e441e2c-002a-4c0a-9ea4-49aa08750bf5">
 
@@ -45,9 +45,10 @@ Ces fichiers se trouvent dans server/database.
 
 - Uploader un fichier :  
 <img width="530" alt="Capture d’écran 2024-10-17 à 23 21 50" src="https://github.com/user-attachments/assets/23848000-6805-48f8-8473-6966473cfbfc">  
-- Activer "Header" dans l'onglets Options puis Validez. 	
-<img width="530" alt="Capture d’écran 2024-10-17 à 23 22 29" src="https://github.com/user-attachments/assets/d85e606e-fde9-4951-9440-50ab7e721064">
-
+  
+- Dans l'onglet Options, activez "Header" puis validez : 
+<img width="530" alt="Capture d’écran 2024-10-17 à 23 22 29" src="https://github.com/user-attachments/assets/d85e606e-fde9-4951-9440-50ab7e721064">  
+  
 - Faire de même avec l'autre table.
 
 ## Lancement du projet 
