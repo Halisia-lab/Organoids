@@ -19,7 +19,7 @@ REACT_APP_S3_URL=https://mouse-organoids.s3.eu-north-1.amazonaws.com
 REACT_APP_API_URL=http://localhost:8080   
 
 ### Base de données 
-Le projet contient un fichier docker-compose.yml pour pouvoir lancer postgreSQL ainsi que pgAdmin sur des conteneurs : 
+Le projet contient un fichier docker-compose.yml pour pouvoir lancer postgreSQL ainsi que pgAdmin sur des conteneurs. Si Docker est installé sur votre machine, vous pouvez effectuer les étapes suivantes :  
 - A l'intérieur du fichier, complétez les variables avec celles du fichier server/.env .  
 - Lancez la commande 'docker-compose up' pour créer démarrer les conteneurs.
 La suite des explications se poursuit avec l'interface de pgAdmin, que l'on accéder sur localhost:8888  
@@ -44,8 +44,8 @@ Ces fichiers se trouvent dans server/database.
 <img width="881" alt="Capture d’écran 2024-10-17 à 23 21 27" src="https://github.com/user-attachments/assets/ebc30fec-3d4e-4136-967a-e40917bb4701">
 
 - Uploader un fichier :  
-<img width="530" alt="Capture d’écran 2024-10-17 à 23 21 50" src="https://github.com/user-attachments/assets/23848000-6805-48f8-8473-6966473cfbfc">
-- Valider 	
+<img width="530" alt="Capture d’écran 2024-10-17 à 23 21 50" src="https://github.com/user-attachments/assets/23848000-6805-48f8-8473-6966473cfbfc">  
+- Activer "Header" dans l'onglets Options puis Validez. 	
 <img width="530" alt="Capture d’écran 2024-10-17 à 23 22 29" src="https://github.com/user-attachments/assets/d85e606e-fde9-4951-9440-50ab7e721064">
 
 - Faire de même avec l'autre table.
