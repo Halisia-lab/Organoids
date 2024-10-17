@@ -80,10 +80,12 @@ function GlobalGrid() {
         setContrastDisplayer(image.contrast);
     }
 
-    const resetSettings = (event) => {
-        setOpacity(mainSegmentation.opacity);
-        setBrightness(mainImage.brightness);
-        setContrast(mainImage.contrast);
+    const resetSettings = async (event) => {
+        const segmentation = await fetchSegmentationByImageId(mainSegmentation.id);
+        const image = await fetchImageById(mainImage.id);
+        setOpacity(segmentation.opacity);
+        setBrightness(image.brightness);
+        setContrast(image.contrast);
     }
 
     const saveSettings = (event) => { 

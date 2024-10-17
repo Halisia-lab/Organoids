@@ -13,8 +13,6 @@ export const fetchImageById = async (id) => {
 };
 
 export const fetchImagesInTesting = async () => {
-    console.log('testing');
-    
     try {
         const response = await fetch(`${API_URL}/testing`);
         const data = await response.json();

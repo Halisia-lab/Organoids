@@ -15,8 +15,6 @@ class SegmentationController {
 
     static async getAllSegmentationsInTesting(req, res) {
         const testingSegmentations = [];
-        console.log(req);
-        
         try {
             const segmentations = await Segmentation.findAll({
                 order: [['id', 'ASC']] 
