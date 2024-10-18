@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchImageById, fetchImagesInTesting, fetchImagesInTraining, fetchImagesInValidation } from "../services/image.service";
 import { fetchSegmentationByImageId, updateSegmentationOpacityById } from ".././services/segmentation.service";
-import {updateImageBrightnessById, updateImageContrastById} from "../services/image.service"
+import { updateImageBrightnessById, updateImageContrastById } from "../services/image.service"
 import Tab from "./Tab";
 import SettingsSlider from "./SettingsSlider";
 import ShowMaskToggle from "./ShowMaskToggle";
@@ -68,7 +68,7 @@ function GlobalGrid() {
         await synchroniseSettings(image.id);
     }
 
-    const synchroniseSettings = async (imageId) => { 
+    const synchroniseSettings = async (imageId) => {
         const segmentation = await fetchSegmentationByImageId(imageId);
         const image = await fetchImageById(imageId);
         setMainSegmentation(segmentation);
@@ -88,7 +88,7 @@ function GlobalGrid() {
         setContrast(image.contrast);
     }
 
-    const saveSettings = (event) => { 
+    const saveSettings = (event) => {
         updateSegmentationOpacityById(mainSegmentation.id, opacity);
         updateImageBrightnessById(mainImage.id, brightness);
         updateImageContrastById(mainImage.id, contrast);
@@ -142,12 +142,12 @@ function GlobalGrid() {
             <div className="row-span-8 bg-black bg-opacity-30 flex flex-col items-center justify-around text-lg">
                 <ShowMaskToggle handleChange={handleToggleChange} />
                 <SettingsSlider label={"Mask Opacity"} value={opacity} handleChange={handleOpacityChange} disabled={!displayMask} negativeValues={false} />
-                <SettingsSlider label={"Brightness"} value={brightness} handleChange={handleBrightnessChange} disabled={false} negativeValues={true}/>
+                <SettingsSlider label={"Brightness"} value={brightness} handleChange={handleBrightnessChange} disabled={false} negativeValues={true} />
                 <SettingsSlider label={"Contrast"} value={contrast} handleChange={handleContrastChange} disabled={false} negativeValues={true} />
-                
+
                 <div className="flex flex-col xl:flex-row space-x-5">
-                <CustomButton label={"Save settings"} primary={true} onClick={saveSettings}/>
-                <CustomButton label={"Undo"} primary={false} onClick={resetSettings}/>
+                    <CustomButton label={"Save settings"} primary={true} onClick={saveSettings} />
+                    <CustomButton label={"Undo"} primary={false} onClick={resetSettings} />
                 </div>
             </div>
 

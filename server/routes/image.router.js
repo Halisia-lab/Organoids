@@ -1,7 +1,7 @@
 const ImageController = require('../controllers/image.controller');
 
 const express = require('express');
-const router = express.Router(); 
+const router = express.Router();
 
 router.get('/', ImageController.getAllImages);
 router.get('/testing', ImageController.getAllImagesInTesting);

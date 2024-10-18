@@ -4,7 +4,7 @@ const { DataTypes } = require("sequelize");
 const Image = require("./image.model");
 
 const Segmentation = sequelize.define("Segmentation", {
-    
+
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -28,13 +28,13 @@ const Segmentation = sequelize.define("Segmentation", {
             model: 'Image',
             key: 'id'
         }
-    },  
+    },
 }, {
     tableName: "Segmentation",
     timestamps: false,
 },
 );
 
-Image.hasOne(Segmentation,{ foreignKey: "imageId"});
+Image.hasOne(Segmentation, { foreignKey: "imageId" });
 
 module.exports = Segmentation;

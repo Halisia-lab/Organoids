@@ -7,7 +7,7 @@ app.listen(8080, async () => {
     console.log(`The server is listening...`);
     testDbConnection();
     try {
-    } catch ( error ) {
+    } catch (error) {
         console.log(error);
     }
 });

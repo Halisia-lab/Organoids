@@ -1,7 +1,7 @@
 const SegmentationController = require('../controllers/segmentation.controller');
 
 const express = require('express');
-const router = express.Router(); 
+const router = express.Router();
 
 router.get('/', SegmentationController.getAllSegmentations);
 router.get('/:id', SegmentationController.getSegmentationById);
