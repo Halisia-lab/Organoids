@@ -5,7 +5,7 @@ Ce projet permet d’offrir une interface destinée aux chercheurs travaillant s
 ## Installation : 
 
 ### Variables d'environnement 
-Créez un fichier à l'interieur du dossier /server avec ces variables :  
+- Créez un fichier .env à l'interieur du dossier /server avec ces variables :  
 
 DB_USERNAME= [à remplir]  
 DB_PASSWORD= [à remplir]  
@@ -13,7 +13,7 @@ DB_HOST= localhost
 DB_NAME= [à remplir]  
 DB_PORT= [à remplir]  
 
-Créez un fichier .env à l'interieur du dossier /client avec ces variables :  
+- Créez un fichier .env à l'interieur du dossier /client avec ces variables :  
 
 REACT_APP_S3_URL=https://mouse-organoids.s3.eu-north-1.amazonaws.com  
 REACT_APP_API_URL=http://localhost:8080   
