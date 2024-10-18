@@ -1,8 +1,0 @@
-{
-    "name": "mouse_organoids",
-    "scripts": {
-      "install": "npm install --prefix server & npm install --prefix client",
-      "start": "npm start --prefix client & npm start --prefix server"
-    }
-  }
-  
