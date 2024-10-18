@@ -36,11 +36,11 @@ La suite des explications se poursuit avec l'interface de pgAdmin, que l'on acc�
 
 ### Installation des dépendances du projet 
 Dans le repertoire /server, effectuez les commandes suivantes : 
-- 'npm run install'
-- 'npm run start'
+- 'npm install'
+- 'npm start'
 
 Dans le répertoire /client, effectuez la commande suivante : 
-- 'npm run install'
+- 'npm install'
 
 ### Remplissage des tables 
 
@@ -59,7 +59,7 @@ Ces fichiers se trouvent dans server/database.
 - Faire de même avec l'autre table.
 
 ## Lancement du projet 
-- Dans le répertoire /server, redémarrez le serveur avec 'npm run start' :
-- Dans le répertoire /client, effectuez également 'npm run start'
+- Dans le répertoire /server, redémarrez le serveur avec 'npm start' :
+- Dans le répertoire /client, effectuez également 'npm start'
 - Accédez à l'application web sur localhost:3000. 
 
