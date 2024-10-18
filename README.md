@@ -15,7 +15,7 @@ Cette installation nécessite que les technologies suivantes soient préalableme
 DB_USERNAME= [à remplir]  
 DB_PASSWORD= [à remplir]  
 DB_HOST= localhost  
-DB_NAME= [à remplir]  
+DB_NAME= organoids  
 DB_PORT= [à remplir]  
 
 - Créez un fichier .env à l'interieur du dossier /client avec ces variables :  
@@ -32,13 +32,15 @@ La suite des explications se poursuit avec l'interface de pgAdmin, que l'on acc�
   
 <img width="763" alt="Capture d’écran 2024-10-17 à 23 40 14" src="https://github.com/user-attachments/assets/4e441e2c-002a-4c0a-9ea4-49aa08750bf5">
 
-- Créez la base de données avec le même nom défini pour DB_NAME
+- Vous trouverez une base de données "organoids". Nous allons la remplir à l'étape suivante.
 
 ### Installation des dépendances du projet 
-
-A la racine du projet, effectuez les commandes suivantes : 
+Dans le repertoire /server, effectuez les commandes suivantes : 
 - 'npm run install'
 - 'npm run start'
+
+Dans le répertoire /client, effectuez la commande suivante : 
+- 'npm run install'
 
 ### Remplissage des tables 
 
@@ -57,5 +59,7 @@ Ces fichiers se trouvent dans server/database.
 - Faire de même avec l'autre table.
 
 ## Lancement du projet 
-Relancez l'application à l'aide de 'npm run start' et accéder au client sur localhost:3000. 
+- Dans le répertoire /server, redémarrez le serveur avec 'npm run start' :
+- Dans le répertoire /client, effectuez également 'npm run start'
+- Accédez à l'application web sur localhost:3000. 
 
