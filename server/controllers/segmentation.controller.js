@@ -2,10 +2,10 @@ const Segmentation = require("../models/segmentation.model");
 
 class SegmentationController {
     static async getAllSegmentations(req, res) {
-        
+
         try {
             const segmentations = await Segmentation.findAll({
-                order: [['id', 'ASC']] 
+                order: [['id', 'ASC']]
             });
             res.status(200).json({ segmentations });
         } catch (error) {
@@ -17,14 +17,14 @@ class SegmentationController {
         const testingSegmentations = [];
         try {
             const segmentations = await Segmentation.findAll({
-                order: [['id', 'ASC']] 
+                order: [['id', 'ASC']]
             });
             segmentations.forEach(segmentation => {
                 if (segmentation["url"].includes("testing/")) {
                     testingSegmentations.push(segmentation);
                 }
             });
-            
+
             res.status(200).json({ testingSegmentations });
         } catch (error) {
             res.status(400).json({ error: error.message });
@@ -36,7 +36,7 @@ class SegmentationController {
         try {
 
             const segmentations = await Segmentation.findAll({
-                order: [['id', 'ASC']] 
+                order: [['id', 'ASC']]
             });
             segmentations.forEach(segmentation => {
                 if (segmentation["url"].includes("training/")) {
@@ -54,7 +54,7 @@ class SegmentationController {
         try {
 
             const segmentations = await Segmentation.findAll({
-                order: [['id', 'ASC']] 
+                order: [['id', 'ASC']]
             });
             segmentations.forEach(segmentation => {
                 if (segmentation["url"].includes("validation/")) {

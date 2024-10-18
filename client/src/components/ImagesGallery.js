@@ -9,8 +9,7 @@ function ImagesGallery({ imageList, mainImage, chooseImage }) {
                     key={image.name}
                     src={`${S3_BUCKET_URL}/${image.url}`}
                     alt={image.name}
-                    className={` flex-shrink-0 ${mainImage.id === image.id ? "w-[205px] h-[160px]" : "w-[181px] h-[136px]"} hover:cursor-pointer hover:opacity-100 hover:w-[205px] hover:h-[160px]`}
-                    onClick={() => {
+                    className={`flex-shrink-0 ${mainImage.id !== image.id ? "w-[86px] h-[70px]" : "w-[125px] h-[92px]"} hover:cursor-pointer hover:opacity-100 hover:w-[125px] hover:h-[92px]`} onClick={() => {
                         chooseImage(image);
                     }}
                 />
