@@ -6,7 +6,7 @@ function SavedSettingsItem({ label, value }) {
         <div>
             <div className="flex items-center">
                 {svgMapping[label]} {label}</div>
-            <div className="text-[30px] p-3 mx-12">{value}</div>
+            <div className="text-[25px] lg:text-[30px] p-3 mx-12">{value}</div>
         </div>
     );
 }

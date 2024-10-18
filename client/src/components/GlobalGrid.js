@@ -145,7 +145,7 @@ function GlobalGrid() {
                 <SettingsSlider label={"Brightness"} value={brightness} handleChange={handleBrightnessChange} disabled={false} negativeValues={true}/>
                 <SettingsSlider label={"Contrast"} value={contrast} handleChange={handleContrastChange} disabled={false} negativeValues={true} />
                 
-                <div className="flex flex-row space-x-5">
+                <div className="flex flex-col xl:flex-row space-x-5">
                 <CustomButton label={"Save settings"} primary={true} onClick={saveSettings}/>
                 <CustomButton label={"Undo"} primary={false} onClick={resetSettings}/>
                 </div>
