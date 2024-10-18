@@ -4,6 +4,11 @@ Ce projet permet d’offrir une interface destinée aux chercheurs travaillant s
 
 ## Installation : 
 
+### Prérequis : 
+Cette installation nécessite que les technologies suivantes soient préalablement installées :  
+- Node.js et npm
+- Docker 
+
 ### Variables d'environnement 
 - Créez un fichier .env à l'interieur du dossier /server avec ces variables :  
 
@@ -19,11 +24,11 @@ REACT_APP_S3_URL=https://mouse-organoids.s3.eu-north-1.amazonaws.com
 REACT_APP_API_URL=http://localhost:8080   
 
 ### Base de données 
-Le projet contient un fichier docker-compose.yml pour pouvoir lancer postgreSQL ainsi que pgAdmin sur des conteneurs. Si Docker est installé sur votre machine, vous pouvez effectuer les étapes suivantes :  
+Le projet contient un fichier docker-compose.yml pour pouvoir lancer postgreSQL ainsi que pgAdmin sur des conteneurs :  
 - A l'intérieur du fichier, complétez les variables avec celles du fichier server/.env .  
 - Lancez la commande 'docker-compose up' pour créer démarrer les conteneurs.
 La suite des explications se poursuit avec l'interface de pgAdmin, que l'on accéder sur localhost:8888  
-- Créez un serveur avec les variables définies dans le docker-compose (pour host, mettre l'adresse IP de la machine au lieu de localhost) :
+- Enregistrer un serveur avec les variables définies dans le docker-compose (pour host, mettre l'adresse IP de la machine au lieu de localhost) :
   
 <img width="763" alt="Capture d’écran 2024-10-17 à 23 40 14" src="https://github.com/user-attachments/assets/4e441e2c-002a-4c0a-9ea4-49aa08750bf5">
 
