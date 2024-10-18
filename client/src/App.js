@@ -8,7 +8,7 @@ function App() {
 
   return (
 
-      <div className="bg-gradient-to-r from-[#0e0327] to-[#3533cd] h-screen p-24 overflow-hidden flex flex-col justify-evenly">
+      <div className="bg-gradient-to-r from-[#0e0327] to-[#3533cd] h-screen p-10 flex flex-col ">
         <Title />
         <GlobalGrid />
       </div>
